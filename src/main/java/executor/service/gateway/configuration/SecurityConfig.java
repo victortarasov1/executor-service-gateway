@@ -19,7 +19,7 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         return serverHttpSecurity
-                .authorizeExchange(exchanges -> exchanges.pathMatchers("/**").hasRole("USER"))
+                .authorizeExchange(exchanges -> exchanges.pathMatchers("/executor/**").hasRole("USER"))
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(v -> v.jwtAuthenticationConverter(grantedAuthoritiesExtractor())))
                 .csrf(ServerHttpSecurity.CsrfSpec::disable).build();

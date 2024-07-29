@@ -36,10 +36,15 @@ public class GateWayConfig {
         return f -> f
                 .rewritePath(regex, "/${segment}")
                 .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
-                .retry(retryConfig -> retryConfig.setRetries(3)
-                        .setMethods(GET)
-                        .setBackoff(Duration.ofMillis(100), Duration.ofMillis(100),2, true))
-                .requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter()).setKeyResolver(userKeyResolver()))
+                .retry(retryConfig -> {
+                    retryConfig.setRetries(3);
+                    retryConfig.setMethods(GET);
+                    retryConfig.setBackoff(Duration.ofMillis(100), Duration.ofMillis(100),2, true);
+                })
+                .requestRateLimiter(config -> {
+                    config.setRateLimiter(redisRateLimiter());
+                    config.setKeyResolver(userKeyResolver());
+                })
                 .circuitBreaker(config -> config.setFallbackUri("fallback:/contactSupport"));
     }
 

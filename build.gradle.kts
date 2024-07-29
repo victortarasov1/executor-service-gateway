@@ -40,6 +40,8 @@ dependencies {
 	testImplementation("io.projectreactor:reactor-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
 }
 
 dependencyManagement {
@@ -52,4 +54,4 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-jib.to.image = "victortarasov/executor-gateway-service:v8"
+jib.to.image = "victortarasov/executor-gateway-service:v9"

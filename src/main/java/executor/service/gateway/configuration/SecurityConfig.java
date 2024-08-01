@@ -21,7 +21,7 @@ public class SecurityConfig {
         return serverHttpSecurity
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/actuator/**").permitAll()
-                        .pathMatchers("/executor/**").hasRole("USER"))
+                        .pathMatchers("/executor/**").permitAll())//.hasRole("USER"))
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(v -> v.jwtAuthenticationConverter(grantedAuthoritiesExtractor())))
                 .csrf(ServerHttpSecurity.CsrfSpec::disable).build();

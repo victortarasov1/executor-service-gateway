@@ -54,4 +54,4 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-jib.to.image = "victortarasov/executor-gateway-service:v10"
+jib.to.image = "victortarasov/executor-gateway-service:v11"
